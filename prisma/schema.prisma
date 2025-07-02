@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Potion {
+  id             String        @id @default(cuid())
+  name           String        @unique
+  ingredients    PotionIngredient[]
+  discovered     Boolean       @default(false)
+  discoverPrice  Int           @default(0) // Prix pour découvrir la recette
+  price          Int           @default(0) // Prix de vente de la potion
+  quantity       Int           @default(0) // Quantité de la potion
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Ingredient {
+  id       String             @id @default(cuid())
+  name     String             @unique
+  quantity Int
+  price    Int                @default(0) // Prix d'achat de l'ingrédient
+  potions  PotionIngredient[]
+}
+
+model PotionIngredient {
+  potion      Potion     @relation(fields: [potionId], references: [id])
+  potionId    String
+  ingredient  Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId String
+
+  quantity    Int
+
+  @@id([potionId, ingredientId])
+}
+
+model GameState {
+  id        String   @id @default("main")
+  money     Int      @default(1000)
+  updatedAt DateTime @updatedAt
+}

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+@layer components {
+  .magic-title {
+    @apply text-center font-comic font-extrabold;
+  }
+
+  .magic-title-h1 {
+    @apply magic-title text-4xl sm:text-5xl mb-6 text-pink-flashy;
+  }
+
+  .magic-title-h2 {
+    @apply magic-title text-3xl sm:text-4xl mb-4 text-yellow-flashy;
+  }
+
+  .magic-title-h3 {
+    @apply magic-title text-2xl mb-2 text-sky-flashy;
+  }
+}

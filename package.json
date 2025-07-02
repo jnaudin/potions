@@ -1,0 +1,53 @@
+{
+  "name": "potions",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest --config jest.config.js && jest --config jest.integration.config.js",
+    "test:unit": "jest --config jest.config.js",
+    "test:integration": "jest --config jest.integration.config.js",
+    "check": "tsc --noEmit",
+    "db:reset": "rm -rf prisma/dev.db prisma/migrations && npx prisma migrate dev --name init",
+    "db:seed": "pnpm exec tsx prisma/seed.ts",
+    "db:reload": "pnpm db:reset && pnpm db:seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.11.1",
+    "clsx": "^2.1.1",
+    "next": "15.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "jest": "^30.0.3",
+    "jest-axe": "^10.0.0",
+    "jest-environment-jsdom": "^30.0.4",
+    "lucide-react": "^0.525.0",
+    "node-mocks-http": "^1.17.2",
+    "postcss": "^8.4.38",
+    "prisma": "^6.11.1",
+    "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.4.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5"
+  }
+}
