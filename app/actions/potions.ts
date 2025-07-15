@@ -17,7 +17,7 @@ export async function getPotions(): Promise<GetPotionsResult> {
       },
     });
 
-    const frontendPotions = potions.map((potion) => {
+    const frontendPotions = potions.map((potion: (typeof potions)[number]) => {
       const base = {
         id: potion.id,
         name: potion.name,
@@ -32,7 +32,9 @@ export async function getPotions(): Promise<GetPotionsResult> {
       if (potion.discovered) {
         return {
           ...base,
-          ingredients: potion.ingredients.map((pi) => pi.ingredient.name),
+          ingredients: potion.ingredients.map(
+            (pi: (typeof potion.ingredients)[number]) => pi.ingredient.name
+          ),
         };
       } else {
         return {
@@ -152,7 +154,9 @@ export async function discoverPotion(
       quantity: updatedPotion.quantity,
       createdAt: updatedPotion.createdAt.toISOString(),
       discoveredAt: updatedPotion.updatedAt.toISOString(),
-      ingredients: updatedPotion.ingredients.map((pi) => pi.ingredient.name),
+      ingredients: updatedPotion.ingredients.map(
+        (pi: (typeof updatedPotion.ingredients)[number]) => pi.ingredient.name
+      ),
     };
 
     revalidatePath("/potions");
@@ -192,7 +196,7 @@ export async function createPotion(ingredients: string[]) {
     where: { name: { in: ingredients } },
   });
 
-  const missing = stock.find((ing) => ing.quantity < 1);
+  const missing = stock.find((ing: (typeof stock)[number]) => ing.quantity < 1);
   if (missing) {
     return {
       success: false,
@@ -202,7 +206,7 @@ export async function createPotion(ingredients: string[]) {
 
   // 4. Decrement quantities
   await Promise.all(
-    stock.map((ing) =>
+    stock.map((ing: (typeof stock)[number]) =>
       prisma.ingredient.update({
         where: { id: ing.id },
         data: { quantity: ing.quantity - 1 },
@@ -262,7 +266,9 @@ export async function createPotion(ingredients: string[]) {
     discovered: potion.discovered,
     createdAt: potion.createdAt.toISOString(),
     updatedAt: potion.updatedAt.toISOString(),
-    ingredients: potion.ingredients.map((pi) => pi.ingredient.name),
+    ingredients: potion.ingredients.map(
+      (pi: (typeof potion.ingredients)[number]) => pi.ingredient.name
+    ),
     quantity: potion.quantity,
   };
 

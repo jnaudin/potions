@@ -53,11 +53,7 @@ pnpm test:integration
 pnpm test
 ```
 
-### Tests d'Accessibilité
-
-Le projet inclut des tests d'accessibilité complets :
-
-## 🎮 Fonctionnalités
+## Fonctionnalités
 
 ### Gameplay
 - **Création de potions** : Combiner 3 ingrédients pour créer des potions (connues ou inconnues)
