@@ -273,6 +273,8 @@ export async function createPotion(ingredients: string[]) {
   };
 
   revalidatePath("/potions");
+  revalidatePath("/brew");
+  revalidatePath("/inventory");
 
   return {
     success: true,
